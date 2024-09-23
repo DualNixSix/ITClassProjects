@@ -8,9 +8,7 @@
 
     <!-- Header Section -->
     <header style="padding: 20px;">
-        <!-- Logo -->
         <img src="dailygrindlogo.jpg" alt="The Daily Grind Logo" style="width: 400px; float: left; margin-right: 20px;">
-        <!-- Address -->
         <div style="text-align: right; font-size: 14px;">
             <p style="margin: 0;">605 Washington St<br>Fayette, IA 52142<br>Tel: 888-555-5555</p>
         </div>
@@ -32,12 +30,17 @@
         <ul style="list-style-type: none; padding: 0; font-size: 18px;">
             <li>Specialty Coffees and Teas</li>
             <li>Homemade Breads and Pastries</li>
-            <li>Take Home the Daily Grind House Blend</li>
+            <li><a href="houseblend.html">Take Home the Daily Grind House Blend</a></li>
         </ul>
 
         <!-- Bread Image -->
         <div style="margin-top: 20px;">
             <img src="breads.jpg" alt="Breads Image" style="width: 300px;">
+        </div>
+
+        <!-- PHP Date/Time Section -->
+        <div style="margin-top: 20px;">
+            <p><?php echo date('l, F j, Y, g:i A'); ?></p>
         </div>
     </div>
 
