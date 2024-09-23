@@ -12,30 +12,16 @@
         }
         setInterval(updateDateTime, 1000); // Update every second
 
-        // Poll Functionality
+        // Function to handle the AJAX Poll
         function submitPoll() {
-            const selectedOption = document.querySelector('input[name="coffeePoll"]:checked');
-            if (selectedOption) {
-                const selectedValue = selectedOption.value;
-                localStorage.setItem('pollResponse', selectedValue);
-                alert('Thank you for voting! Your favorite coffee is: ' + selectedValue);
-                displayPollResults();
-            } else {
-                alert('Please select an option before submitting.');
-            }
+            const selectedBlend = document.querySelector('input[name="blend"]:checked').value;
+            const pollResult = document.getElementById('pollResult');
+            
+            // Simulate an AJAX request (since GitHub Pages doesn't support PHP)
+            setTimeout(() => {
+                pollResult.innerHTML = "Thank you for voting! Your choice: " + selectedBlend;
+            }, 1000);
         }
-
-        function displayPollResults() {
-            const pollResponse = localStorage.getItem('pollResponse');
-            if (pollResponse) {
-                document.getElementById('pollResult').innerText = 'Your favorite coffee: ' + pollResponse;
-            }
-        }
-
-        window.onload = function() {
-            displayPollResults();
-            updateDateTime();
-        };
     </script>
 </head>
 <body style="font-family: Arial, sans-serif; margin: 0; padding: 0;">
@@ -77,18 +63,14 @@
         </div>
 
         <!-- Poll Section -->
-        <div style="margin-top: 20px;">
-            <h2>What is your favorite coffee?</h2>
-            <form id="coffeePollForm">
-                <input type="radio" id="espresso" name="coffeePoll" value="Espresso">
-                <label for="espresso">Espresso</label><br>
-                <input type="radio" id="latte" name="coffeePoll" value="Latte">
-                <label for="latte">Latte</label><br>
-                <input type="radio" id="americano" name="coffeePoll" value="Americano">
-                <label for="americano">Americano</label><br>
-                <input type="radio" id="cappuccino" name="coffeePoll" value="Cappuccino">
-                <label for="cappuccino">Cappuccino</label><br><br>
-                <button type="button" onclick="submitPoll()">Submit Vote</button>
+        <div style="margin-top: 40px;">
+            <h2>Which Coffee Blend Do You Prefer?</h2>
+            <form onsubmit="event.preventDefault(); submitPoll();">
+                <input type="radio" name="blend" value="Traditional" id="traditional" required> Traditional <br>
+                <input type="radio" name="blend" value="Decaffeinated" id="decaf"> Decaffeinated <br>
+                <input type="radio" name="blend" value="Holiday Blend" id="holiday"> Holiday Blend <br>
+                <br>
+                <button type="submit">Submit Vote</button>
             </form>
             <div id="pollResult" style="margin-top: 20px; font-weight: bold;"></div>
         </div>
