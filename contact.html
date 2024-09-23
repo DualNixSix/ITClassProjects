@@ -3,24 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Contact Us - The Daily Grind Coffee House</title>
-    <script>
-        function validateForm() {
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
-            const email = document.getElementById('email').value;
-            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-            if (firstName === "" || lastName === "" || !emailPattern.test(email)) {
-                alert('Please fill out all required fields correctly.');
-                return false;
-            }
-            return true;
-        }
-
-        function resetForm() {
-            document.getElementById('contactForm').reset();
-        }
-    </script>
 </head>
 <body style="font-family: Arial, sans-serif; margin: 0; padding: 0;">
 
@@ -47,36 +29,23 @@
     <!-- Contact Form Section -->
     <div style="padding: 20px;">
         <h1 style="color: #5D4037;">Contact The Daily Grind</h1>
-        <form id="contactForm" onsubmit="return validateForm()">
-            <label for="salutation">Salutation:</label>
-            <select id="salutation" name="salutation" style="width: 100%; margin-bottom: 10px;">
-                <option value="Mr">Mr</option>
-                <option value="Ms">Ms</option>
-                <option value="Mrs">Mrs</option>
-            </select>
+        <form action="https://formspree.io/f/{your_form_id}" method="POST">
             <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" style="width: 100%; margin-bottom: 10px;">
+            <input type="text" id="firstName" name="firstName" style="width: 100%; margin-bottom: 10px;" required>
+            
             <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" style="width: 100%; margin-bottom: 10px;">
+            <input type="text" id="lastName" name="lastName" style="width: 100%; margin-bottom: 10px;" required>
+            
             <label for="email">E-mail Address:</label>
-            <input type="email" id="email" name="email" style="width: 100%; margin-bottom: 10px;">
-            <label for="phone">Phone Number:</label>
-            <input type="text" id="phone" name="phone" style="width: 100%; margin-bottom: 10px;">
-            <label for="subject">Subject:</label>
-            <input type="text" id="subject" name="subject" style="width: 100%; margin-bottom: 10px;">
+            <input type="email" id="email" name="email" style="width: 100%; margin-bottom: 10px;" required>
+            
             <label for="comments">Comments:</label>
-            <textarea id="comments" name="comments" style="width: 100%; margin-bottom: 10px;"></textarea>
-            <input type="checkbox" id="reply" name="reply">
-            <label for="reply">Please check here if you wish to receive a reply</label><br><br>
+            <textarea id="comments" name="comments" style="width: 100%; margin-bottom: 10px;" required></textarea>
+            
             <input type="submit" value="Submit" style="margin-right: 10px;">
-            <input type="button" value="Reset Form" onclick="resetForm()">
+            <input type="reset" value="Reset Form">
         </form>
     </div>
-
-    <!-- Current Date Script -->
-    <script>
-        document.write(new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }));
-    </script>
 
 </body>
 </html>
