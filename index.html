@@ -13,14 +13,31 @@
         setInterval(updateDateTime, 1000); // Update every second
 
         // Function to handle the AJAX Poll
-        function submitPoll() {
+        function submitPoll(event) {
+            event.preventDefault(); // Prevent the form from reloading the page
             const selectedBlend = document.querySelector('input[name="blend"]:checked').value;
             const pollResult = document.getElementById('pollResult');
             
-            // Simulate an AJAX request (since GitHub Pages doesn't support PHP)
-            setTimeout(() => {
-                pollResult.innerHTML = "Thank you for voting! Your choice: " + selectedBlend;
-            }, 1000);
+            // Show poll result on the page
+            pollResult.innerHTML = "Thank you for voting! Your choice: " + selectedBlend;
+            
+            // Submit poll result to Formspree
+            const form = document.getElementById('pollForm');
+            const formData = new FormData(form);
+
+            fetch("https://formspree.io/f/xpwagyrq", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    console.log("Poll result sent to email");
+                } else {
+                    console.error("Error sending poll result.");
+                }
+            }).catch(error => console.error("Error:", error));
         }
     </script>
 </head>
@@ -65,7 +82,7 @@
         <!-- Poll Section -->
         <div style="margin-top: 40px;">
             <h2>Which Coffee Blend Do You Prefer?</h2>
-            <form onsubmit="event.preventDefault(); submitPoll();">
+            <form id="pollForm" onsubmit="submitPoll(event);">
                 <input type="radio" name="blend" value="Traditional" id="traditional" required> Traditional <br>
                 <input type="radio" name="blend" value="Decaffeinated" id="decaf"> Decaffeinated <br>
                 <input type="radio" name="blend" value="Holiday Blend" id="holiday"> Holiday Blend <br>
